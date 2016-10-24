@@ -21,9 +21,9 @@ The app uses [The Movie Database](https://www.themoviedb.org/documentation/api) 
 - Picasso
 
 ## To do
-- [ ] RecyclerView and adapter
+- [X] RecyclerView and adapter
+- [X] Consume API and show movies in grid
 - [ ] Material design in detail screen
-- [ ] Consume API 
 - [ ] Pass movie informations to DetailActivity with Intent
 - [ ] Activity & Fragment lifecycle
 - [ ] Favorite movie database
