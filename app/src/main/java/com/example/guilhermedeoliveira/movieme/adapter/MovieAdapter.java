@@ -1,6 +1,8 @@
 package com.example.guilhermedeoliveira.movieme.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.guilhermedeoliveira.movieme.R;
 import com.example.guilhermedeoliveira.movieme.model.Movie;
+import com.example.guilhermedeoliveira.movieme.view.DetailActivity;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -53,9 +57,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Movie movie = mMovieList.get(position);
+        final Movie movie = mMovieList.get(position);
         Picasso.with(mContext).load(movie.getPoster()).placeholder(R.drawable.placeholder)
                 .into(holder.mPoster);
+        holder.mPoster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext,"You selected " + movie.getTitle(),Toast.LENGTH_SHORT).show();
+                String movieIntent = movie.getTitle();
+                Intent intent = new Intent(mContext, DetailActivity.class)
+                        .putExtra(Intent.EXTRA_TEXT, movieIntent);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

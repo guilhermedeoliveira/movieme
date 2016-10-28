@@ -5,13 +5,19 @@
 
     <!-- S -->
     <string name="action_settings">Settings</string>
+
+    <!-- T -->
+    <string name="title_activity_detail">Settings</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
 
     <string name="sort_by_key">Sort By</string>
-    <string name="pref_general_label">Sort by</string>
+    <string name="pref_general_title">Sort by</string>
     <string name="pref_general_popular">Popular</string>
     <string name="pref_general_top_rated">Top Rated</string>
 
+    <string name="pref_sort_popular" translatable="false">Popular</string>
+    <string name="pref_sort_top_rated" translatable="false">Top Rated</string>
+    <string name="title_activity_settings_fragment">Settings</string>
 </resources>

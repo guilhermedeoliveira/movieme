@@ -41,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
         // toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         // fragment
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new MainFragment()).commit();
+                    .add(R.id.container, new MainFragment())
+                    .commit();
         }
     }
 
@@ -62,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
-            default:
-                Toast.makeText(this, "Error. Choose Settings", Toast.LENGTH_SHORT).show();
             }
             return super.onOptionsItemSelected(item);
     }

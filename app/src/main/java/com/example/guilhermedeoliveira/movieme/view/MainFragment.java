@@ -1,6 +1,9 @@
 package com.example.guilhermedeoliveira.movieme.view;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -33,9 +36,11 @@ public class MainFragment extends Fragment {
 
     public static final String TAG = MainFragment.class.getSimpleName();
     public static final String BASE_URL = "https://api.themoviedb.org/3/";
+    public static final String THE_MOVIE_DATABASE_API_KEY = "PROTECTED_KEY";
 
     private List<Movie> movies;
     private RecyclerView mRecyclerView;
+    private MovieAdapter mMovieAdapter;
 
     public MainFragment() {
 
@@ -58,7 +63,12 @@ public class MainFragment extends Fragment {
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
 
-        Call<MovieSchema> call = apiService.getPopularMovies(BuildConfig.THE_MOVIE_DATABASE_API_KEY);
+        /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String sortKey = prefs.getString("sortkey", "");
+        String key = getQuery(sortKey); */
+
+        Call<MovieSchema> call = apiService.getPopularMovies(THE_MOVIE_DATABASE_API_KEY);
+        //Call<MovieSchema> call = apiService.getPopularMovies(BuildConfig.THE_MOVIE_DATABASE_API_KEY);
         call.enqueue(new Callback<MovieSchema>() {
             @Override
             public void onResponse(Call<MovieSchema> call, Response<MovieSchema> response) {
