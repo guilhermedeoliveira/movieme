@@ -27,13 +27,13 @@ public class Movie {
     private String mBackdrop;
 
     @SerializedName("vote_average")
-    private double mRating;
+    private Double mRating;
 
     @SerializedName("vote_count")
     private int mVoteCount;
 
     @SerializedName("overview")
-    private String mDescription;
+    private String mSynopsis;
 
     @SerializedName("popularity")
     private double mPopularity;
@@ -63,7 +63,7 @@ public class Movie {
         return "http://image.tmdb.org/t/p/w185" + mPoster;
     }
 
-    public double getRating() {
+    public Double getRating() {
         return mRating;
     }
 
@@ -79,8 +79,8 @@ public class Movie {
         return mVoteCount;
     }
 
-    public String getDescription() {
-        return mDescription;
+    public String getSynopsis() {
+        return mSynopsis;
     }
 
     public double getPopularity() {

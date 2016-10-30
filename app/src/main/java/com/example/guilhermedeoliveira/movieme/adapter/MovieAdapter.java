@@ -38,6 +38,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         public ViewHolder(View itemView) {
             super(itemView);
             mPoster = (ImageView) itemView.findViewById(R.id.movie_poster);
+            /*itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Context context = view.getContext();
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra("texto", );
+                    //intent.putExtra(DetailActivity.EXTRA_POSITION, getAdapterPosition());
+                    context.startActivity(intent);
+                }
+            }); */
         }
     }
 
@@ -60,14 +70,21 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         final Movie movie = mMovieList.get(position);
         Picasso.with(mContext).load(movie.getPoster()).placeholder(R.drawable.placeholder)
                 .into(holder.mPoster);
+        //String intentTitle = movie.getTitle();
         holder.mPoster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext,"You selected " + movie.getTitle(),Toast.LENGTH_SHORT).show();
-                String movieIntent = movie.getTitle();
-                Intent intent = new Intent(mContext, DetailActivity.class)
-                        .putExtra(Intent.EXTRA_TEXT, movieIntent);
+                Intent intent = new Intent(mContext, DetailActivity.class);
+
+                intent.putExtra("title", movie.getTitle());
+                intent.putExtra("synopsis", movie.getSynopsis());
+                intent.putExtra("release_date", movie.getReleaseDate().substring(0, 4));
+                intent.putExtra("rating", movie.getRating().toString());
+                intent.putExtra("poster", movie.getPoster());
+
                 mContext.startActivity(intent);
+
+
             }
         });
     }
