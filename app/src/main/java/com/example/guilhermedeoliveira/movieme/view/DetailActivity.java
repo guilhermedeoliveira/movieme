@@ -1,7 +1,8 @@
 package com.example.guilhermedeoliveira.movieme.view;
 
+import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.guilhermedeoliveira.movieme.R;
-import com.example.guilhermedeoliveira.movieme.model.Movie;
+import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -23,7 +24,6 @@ public class DetailActivity extends AppCompatActivity {
      * data de lançamento
      */
 
-    TextView mTitle;
     TextView mDescription;
     TextView mRelease;
     TextView mRating;
@@ -38,15 +38,9 @@ public class DetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // Set title
-
-        // Movie movie = intent.getExtras().getParcelable("movie");
 
         Intent intent = getIntent();
         if (intent != null) {
-
-            mTitle = (TextView) findViewById(R.id.detail_title);
-            mTitle.setText(intent.getStringExtra("title"));
 
             mDescription = (TextView) findViewById(R.id.detail_synopsis);
             mDescription.setText(intent.getStringExtra("synopsis"));
@@ -58,16 +52,18 @@ public class DetailActivity extends AppCompatActivity {
             mRating.setText(intent.getStringExtra("rating"));
 
             mPoster = (ImageView) findViewById(R.id.detail_poster);
-            //mPoster.setImageResource(intent.getE("poster"));
-            mPoster.setImageResource(intent.getIntExtra("poster",0));
+            String imagePoster = intent.getExtras().getString("poster");
+            Picasso.with(this).load(imagePoster).fit().into(mPoster);
 
-            collapsingToolbar= (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+            collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
             collapsingToolbar.setTitle(intent.getStringExtra("title"));
 
-            //String forecastStr = intent.getStringExtra(Intent.EXTRA_TEXT);
-
-
-
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                collapsingToolbar.setExpandedTitleColor(this.getColor(R.color.transparent));
+            } else {
+                collapsingToolbar.setExpandedTitleColor(this.getResources()
+                        .getColor(R.color.transparent));
+            }
         }
     }
 }

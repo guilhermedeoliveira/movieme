@@ -3,6 +3,10 @@
     <!-- A -->
     <string name="app_name">Movieme</string>
 
+    <!-- D -->
+    <string name="description_synopsis">Synopsis</string>
+    <string name="description_release">Release date</string>
+
     <!-- S -->
     <string name="action_settings">Settings</string>
 

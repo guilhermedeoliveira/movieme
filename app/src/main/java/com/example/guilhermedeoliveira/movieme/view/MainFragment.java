@@ -36,7 +36,7 @@ public class MainFragment extends Fragment {
 
     public static final String TAG = MainFragment.class.getSimpleName();
     public static final String BASE_URL = "https://api.themoviedb.org/3/";
-    public static final String THE_MOVIE_DATABASE_API_KEY = "903aa9038edddb40aca4b68c715d797d";
+    public static final String THE_MOVIE_DATABASE_API_KEY = "Protected_key";
 
     private List<Movie> movies;
     private RecyclerView mRecyclerView;

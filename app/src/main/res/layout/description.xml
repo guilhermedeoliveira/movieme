@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -7,28 +6,44 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="?attr/colorPrimaryDark"
-        android:text="Title"
-        android:layout_marginBottom="@dimen/activity_vertical_margin" />
-
-    <TextView
-        android:id="@+id/detail_title"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/activity_vertical_margin"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/rating_image"
+            android:layout_width="@dimen/body_title"
+            android:layout_height="@dimen/body_title"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/btn_star_big_off"
+            android:tint="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/detail_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/body_text"
+            android:text="5.0" />
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="?attr/colorPrimaryDark"
-        android:text="Synopsis"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:textSize="@dimen/body_title"
+        android:text="@string/description_synopsis"
         android:layout_marginTop="@dimen/activity_vertical_margin" />
 
     <TextView
         android:id="@+id/detail_synopsis"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/body_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -36,29 +51,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="?attr/colorPrimaryDark"
-        android:text="Release date"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:text="@string/description_release"
+        android:textSize="@dimen/body_title"
         android:layout_marginTop="@dimen/activity_vertical_margin" />
 
     <TextView
         android:id="@+id/detail_release"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/body_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-    <ImageView
-        android:id="@+id/rating_image"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_centerInParent="true"
-        android:scaleType="centerCrop"
-        android:src="@android:drawable/btn_star_big_off"
-        android:tint="@color/colorAccent" />
-
-    <TextView
-        android:id="@+id/detail_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:text="5.0" />
-
 </LinearLayout>

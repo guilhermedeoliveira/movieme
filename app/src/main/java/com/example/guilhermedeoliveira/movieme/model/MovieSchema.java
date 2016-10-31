@@ -41,5 +41,6 @@ public class MovieSchema {
     public int getTotalPages() {
         return mTotalPages;
     }
+
 }
 

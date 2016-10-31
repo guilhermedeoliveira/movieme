@@ -2,24 +2,17 @@ package com.example.guilhermedeoliveira.movieme.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.guilhermedeoliveira.movieme.R;
 import com.example.guilhermedeoliveira.movieme.model.Movie;
 import com.example.guilhermedeoliveira.movieme.view.DetailActivity;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -38,16 +31,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         public ViewHolder(View itemView) {
             super(itemView);
             mPoster = (ImageView) itemView.findViewById(R.id.movie_poster);
-            /*itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Context context = view.getContext();
-                    Intent intent = new Intent(context, DetailActivity.class);
-                    intent.putExtra("texto", );
-                    //intent.putExtra(DetailActivity.EXTRA_POSITION, getAdapterPosition());
-                    context.startActivity(intent);
-                }
-            }); */
         }
     }
 
@@ -61,7 +44,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.adapter_movie, parent, false);
-
         return new ViewHolder(itemView);
     }
 
@@ -70,7 +52,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         final Movie movie = mMovieList.get(position);
         Picasso.with(mContext).load(movie.getPoster()).placeholder(R.drawable.placeholder)
                 .into(holder.mPoster);
-        //String intentTitle = movie.getTitle();
         holder.mPoster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,8 +64,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 intent.putExtra("poster", movie.getPoster());
 
                 mContext.startActivity(intent);
-
-
             }
         });
     }
