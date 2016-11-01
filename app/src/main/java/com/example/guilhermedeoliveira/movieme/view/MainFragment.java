@@ -40,7 +40,6 @@ public class MainFragment extends Fragment {
 
     private List<Movie> movies;
     private RecyclerView mRecyclerView;
-    private MovieAdapter mMovieAdapter;
 
     public MainFragment() {
 

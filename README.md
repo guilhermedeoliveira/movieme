@@ -28,7 +28,7 @@ Stage 01
 - [X] Material design in detail screen
 - [X] Pass movie informations to DetailActivity via Intent
 - [X] Set preferences with popular and top rated movies
-- [ ] Test Internet connection
+- [X] Test Internet connection
 
 Stage 02
 - [ ] Activity & Fragment lifecycle
