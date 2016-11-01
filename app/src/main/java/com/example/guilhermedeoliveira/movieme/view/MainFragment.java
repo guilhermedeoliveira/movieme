@@ -1,6 +1,5 @@
 package com.example.guilhermedeoliveira.movieme.view;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,13 +11,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.example.guilhermedeoliveira.movieme.BuildConfig;
 import com.example.guilhermedeoliveira.movieme.R;
 import com.example.guilhermedeoliveira.movieme.adapter.MovieAdapter;
 import com.example.guilhermedeoliveira.movieme.api.ApiService;
 import com.example.guilhermedeoliveira.movieme.model.Movie;
 import com.example.guilhermedeoliveira.movieme.model.MovieSchema;
+import com.example.guilhermedeoliveira.movieme.utils.Connectivity;
+import com.example.guilhermedeoliveira.movieme.utils.Constants;
 
 import java.util.List;
 
@@ -35,8 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainFragment extends Fragment {
 
     public static final String TAG = MainFragment.class.getSimpleName();
-    public static final String BASE_URL = "https://api.themoviedb.org/3/";
-    public static final String THE_MOVIE_DATABASE_API_KEY = "Protected_key";
+    public static final String THE_MOVIE_DATABASE_API_KEY = "";
 
     private List<Movie> movies;
     private RecyclerView mRecyclerView;
@@ -50,41 +50,65 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        // RecyclerView
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
+        if (Connectivity.isOnline(getActivity())) {
+            // RecyclerView
+            mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+            mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        } else {
+            Toast.makeText(getActivity(), "Please, check your Internet connection", Toast.LENGTH_SHORT).show();
+        }
         // Retrofit
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
 
-        /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String sortKey = prefs.getString("sortkey", "");
-        String key = getQuery(sortKey); */
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String sortByKey = prefs.getString(getString(R.string.sort_by_key),
+                getString(R.string.pref_sort_popular));
 
-        Call<MovieSchema> call = apiService.getPopularMovies(THE_MOVIE_DATABASE_API_KEY);
-        //Call<MovieSchema> call = apiService.getPopularMovies(BuildConfig.THE_MOVIE_DATABASE_API_KEY);
-        call.enqueue(new Callback<MovieSchema>() {
-            @Override
-            public void onResponse(Call<MovieSchema> call, Response<MovieSchema> response) {
-                if (response.isSuccessful()) {
-                    movies = response.body().getListMovie();
-                    mRecyclerView.setAdapter(new MovieAdapter(getActivity(), movies));
-                } else {
-                    Log.i(TAG, "Error: " + response.code());
-                }
-            }
+        switch (sortByKey) {
+            case Constants.POPULAR:
+                Call<MovieSchema> callPop = apiService.getPopularMovies(THE_MOVIE_DATABASE_API_KEY);
+                callPop.enqueue(new Callback<MovieSchema>() {
+                    @Override
+                    public void onResponse(Call<MovieSchema> call, Response<MovieSchema> response) {
+                        if (response.isSuccessful()) {
+                            movies = response.body().getListMovie();
+                            mRecyclerView.setAdapter(new MovieAdapter(getActivity(), movies));
+                        } else {
+                            Log.i(TAG, "Error: " + response.code());
+                        }
+                    }
 
-            @Override
-            public void onFailure(Call<MovieSchema> call, Throwable t) {
-                Log.e(TAG, t.getMessage());
-            }
-        });
+                    @Override
+                    public void onFailure(Call<MovieSchema> call, Throwable t) {
+                        Log.e(TAG, t.getMessage());
+                    }
+                });
+                break;
+            case Constants.TOP_RATED:
+                Call<MovieSchema> callTop = apiService.getTopRatedMovies(THE_MOVIE_DATABASE_API_KEY);
+                callTop.enqueue(new Callback<MovieSchema>() {
+                    @Override
+                    public void onResponse(Call<MovieSchema> call, Response<MovieSchema> response) {
+                        if (response.isSuccessful()) {
+                            movies = response.body().getListMovie();
+                            mRecyclerView.setAdapter(new MovieAdapter(getActivity(), movies));
+                        } else {
+                            Log.i(TAG, "Error: " + response.code());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<MovieSchema> call, Throwable t) {
+                        Log.e(TAG, t.getMessage());
+                    }
+                });
+        }
         return rootView;
     }
 }

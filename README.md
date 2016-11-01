@@ -27,7 +27,8 @@ Stage 01
 - [X] Consume API and show movies in grid
 - [X] Material design in detail screen
 - [X] Pass movie informations to DetailActivity via Intent
-- [ ] Set preferences with popular and top rated movies
+- [X] Set preferences with popular and top rated movies
+- [ ] Test Internet connection
 
 Stage 02
 - [ ] Activity & Fragment lifecycle

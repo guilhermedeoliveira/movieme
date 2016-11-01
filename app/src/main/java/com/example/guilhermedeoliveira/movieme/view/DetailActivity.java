@@ -53,7 +53,7 @@ public class DetailActivity extends AppCompatActivity {
 
             mPoster = (ImageView) findViewById(R.id.detail_poster);
             String imagePoster = intent.getExtras().getString("poster");
-            Picasso.with(this).load(imagePoster).fit().into(mPoster);
+            Picasso.with(this).load(imagePoster).into(mPoster);
 
             collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
             collapsingToolbar.setTitle(intent.getStringExtra("title"));
