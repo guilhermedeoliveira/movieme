@@ -36,7 +36,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainFragment extends Fragment {
 
     public static final String TAG = MainFragment.class.getSimpleName();
-    public static final String THE_MOVIE_DATABASE_API_KEY = "";
 
     private List<Movie> movies;
     private RecyclerView mRecyclerView;
@@ -71,7 +70,7 @@ public class MainFragment extends Fragment {
 
         switch (sortByKey) {
             case Constants.POPULAR:
-                Call<MovieSchema> callPop = apiService.getPopularMovies(THE_MOVIE_DATABASE_API_KEY);
+                Call<MovieSchema> callPop = apiService.getPopularMovies(Constants.THE_MOVIE_DATABASE_API_KEY);
                 callPop.enqueue(new Callback<MovieSchema>() {
                     @Override
                     public void onResponse(Call<MovieSchema> call, Response<MovieSchema> response) {
@@ -90,7 +89,7 @@ public class MainFragment extends Fragment {
                 });
                 break;
             case Constants.TOP_RATED:
-                Call<MovieSchema> callTop = apiService.getTopRatedMovies(THE_MOVIE_DATABASE_API_KEY);
+                Call<MovieSchema> callTop = apiService.getTopRatedMovies(Constants.THE_MOVIE_DATABASE_API_KEY);
                 callTop.enqueue(new Callback<MovieSchema>() {
                     @Override
                     public void onResponse(Call<MovieSchema> call, Response<MovieSchema> response) {

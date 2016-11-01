@@ -12,7 +12,7 @@ Build an app to help users discover popular and recent movies. You will build a 
 
 The app uses [The Movie Database](https://www.themoviedb.org/documentation/api) API to fetch movies. Set your own API key and paste it to:
     ```
-    app/build.gradle
+    utils/Constants
     ```
 
 ## Libraries
