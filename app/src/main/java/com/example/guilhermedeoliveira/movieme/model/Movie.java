@@ -86,5 +86,4 @@ public class Movie {
     public double getPopularity() {
         return mPopularity;
     }
-
 }
