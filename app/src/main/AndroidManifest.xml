@@ -34,5 +34,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.MainActivity" />
         </activity>
+        <provider
+            android:authorities="com.example.guilhermedeoliveira.movieme"
+            android:name=".data.MovieProvider" />
     </application>
 </manifest>
