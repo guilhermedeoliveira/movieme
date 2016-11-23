@@ -57,7 +57,14 @@ public class MainFragment extends Fragment {
         } else {
             Toast.makeText(getActivity(), "Please, check your Internet connection", Toast.LENGTH_SHORT).show();
         }
-        // Retrofit
+        return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    // Retrofit client
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -78,12 +85,18 @@ public class MainFragment extends Fragment {
                             movies = response.body().getListMovie();
                             mRecyclerView.setAdapter(new MovieAdapter(getActivity(), movies));
                         } else {
+                            Toast.makeText(getActivity()
+                                    , "Something went wrong, please check your internet connection and try again!"
+                                    , Toast.LENGTH_SHORT).show();
                             Log.i(TAG, "Error: " + response.code());
                         }
                     }
 
                     @Override
                     public void onFailure(Call<MovieSchema> call, Throwable t) {
+                        Toast.makeText(getActivity()
+                                , "Something went wrong, please check your internet connection and try again!"
+                                , Toast.LENGTH_SHORT).show();
                         Log.e(TAG, t.getMessage());
                     }
                 });
@@ -97,6 +110,9 @@ public class MainFragment extends Fragment {
                             movies = response.body().getListMovie();
                             mRecyclerView.setAdapter(new MovieAdapter(getActivity(), movies));
                         } else {
+                            Toast.makeText(getActivity()
+                                    , "Something went wrong, please check your internet connection and try again!"
+                                    , Toast.LENGTH_SHORT).show();
                             Log.i(TAG, "Error: " + response.code());
                         }
                     }
@@ -107,6 +123,6 @@ public class MainFragment extends Fragment {
                     }
                 });
         }
-        return rootView;
+
     }
 }
