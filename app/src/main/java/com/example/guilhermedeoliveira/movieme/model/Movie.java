@@ -1,5 +1,6 @@
 package com.example.guilhermedeoliveira.movieme.model;
 
+import com.example.guilhermedeoliveira.movieme.utils.Constants;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class Movie {
     }
 
     public String getPoster() {
-        return "http://image.tmdb.org/t/p/w185" + mPoster;
+        return Constants.IMAGE_BASE_URL + mPoster;
     }
 
     public Double getRating() {

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.guilhermedeoliveira.movieme.R;
 import com.example.guilhermedeoliveira.movieme.adapter.MovieAdapter;
+import com.example.guilhermedeoliveira.movieme.api.Api;
 import com.example.guilhermedeoliveira.movieme.api.ApiService;
 import com.example.guilhermedeoliveira.movieme.model.Movie;
 import com.example.guilhermedeoliveira.movieme.model.MovieSchema;
@@ -57,23 +58,13 @@ public class MainFragment extends Fragment {
         } else {
             Toast.makeText(getActivity(), "Please, check your Internet connection", Toast.LENGTH_SHORT).show();
         }
-        return rootView;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    // Retrofit client
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        ApiService apiService = retrofit.create(ApiService.class);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String sortByKey = prefs.getString(getString(R.string.sort_by_key),
                 getString(R.string.pref_sort_popular));
+
+        // Retrofit
+        Api.ApiService apiService = Api.getClient();
 
         switch (sortByKey) {
             case Constants.POPULAR:
@@ -85,18 +76,12 @@ public class MainFragment extends Fragment {
                             movies = response.body().getListMovie();
                             mRecyclerView.setAdapter(new MovieAdapter(getActivity(), movies));
                         } else {
-                            Toast.makeText(getActivity()
-                                    , "Something went wrong, please check your internet connection and try again!"
-                                    , Toast.LENGTH_SHORT).show();
                             Log.i(TAG, "Error: " + response.code());
                         }
                     }
 
                     @Override
                     public void onFailure(Call<MovieSchema> call, Throwable t) {
-                        Toast.makeText(getActivity()
-                                , "Something went wrong, please check your internet connection and try again!"
-                                , Toast.LENGTH_SHORT).show();
                         Log.e(TAG, t.getMessage());
                     }
                 });
@@ -110,9 +95,6 @@ public class MainFragment extends Fragment {
                             movies = response.body().getListMovie();
                             mRecyclerView.setAdapter(new MovieAdapter(getActivity(), movies));
                         } else {
-                            Toast.makeText(getActivity()
-                                    , "Something went wrong, please check your internet connection and try again!"
-                                    , Toast.LENGTH_SHORT).show();
                             Log.i(TAG, "Error: " + response.code());
                         }
                     }
@@ -123,6 +105,6 @@ public class MainFragment extends Fragment {
                     }
                 });
         }
-
+        return rootView;
     }
 }

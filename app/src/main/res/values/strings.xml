@@ -2,13 +2,14 @@
 
     <!-- A -->
     <string name="app_name">Movieme</string>
+    <string name="action_popular">Popular</string>
+    <string name="action_top_rated">Top Rated</string>
+    <string name="action_favorite">Favorite</string>
+    <string name="action_settings">Settings</string>
 
     <!-- D -->
     <string name="description_synopsis">Synopsis</string>
     <string name="description_release">Release date</string>
-
-    <!-- S -->
-    <string name="action_settings">Settings</string>
 
     <!-- T -->
     <string name="title_activity_detail">Settings</string>

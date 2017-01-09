@@ -3,8 +3,11 @@ package com.example.guilhermedeoliveira.movieme.api;
 import com.example.guilhermedeoliveira.movieme.model.MovieSchema;
 import com.example.guilhermedeoliveira.movieme.model.ReviewSchema;
 import com.example.guilhermedeoliveira.movieme.model.VideoSchema;
+import com.example.guilhermedeoliveira.movieme.utils.Constants;
 
 import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
